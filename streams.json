@@ -1,16 +1,12 @@
-{
-  "usa-vs-australia": [
-    {
-      "name": "Majed Sport",
-      "url": "https://ligspain2.blogspot.com/",
-      "type": "website"
-    }
-  ],
-  "netherlands-vs-sweden": [
-    {
-      "name": "Majed Sport",
-      "url": "https://ligspain2.blogspot.com/",
-      "type": "website"
-    }
-  ]
-}
+[
+  {
+    "name": "Majed Sport",
+    "url": "https://ligspain2.blogspot.com/",
+    "type": "website"
+  },
+  {
+    "name": "Server 2",
+    "url": "https://example.com/embed",
+    "type": "iframe"
+  }
+]
