@@ -1,137 +1,161 @@
-# ⚽ World Cup 2026 — Public JSON API
+# 🔌 Public JSON API
 
-A **free, public, read-only JSON API** for the FIFA World Cup 2026 — matches,
-results, live scores, match details (goals, cards, official FIFA stats), top
-scorers, group standings and per‑player physical data.
+World Cup 2026 Companion exposes a small, **read-only JSON API**. It is written in
+PHP, but **any language can consume it** (Python, JavaScript, Java, Go, Rust, C#, …)
+because it speaks plain HTTP + JSON.
 
-- ✅ **No API key, no signup, no rate sign‑up** — just call it.
-- ✅ **CORS enabled** (`Access-Control-Allow-Origin: *`) → use it directly from a browser, mobile app (React Native / Flutter), or any backend.
-- ✅ Responses are `application/json; charset=utf-8`, cached ~60s.
-- 📊 Data source: **openfootball** (schedule, Public Domain) + **official FIFA** post‑match reports + live results.
+- **No API key required.** Data comes from the public-domain
+  [openfootball](https://github.com/openfootball) dataset and is cached on the server.
+- **CORS is open** (`Access-Control-Allow-Origin: *`), so you can call it directly
+  from a browser / front-end app.
+- Responses are cached ~60s (`Cache-Control: public, max-age=60`).
 
-> Live site: **[wcup2026.org](https://wcup2026.org/index.php?lang=en)** · Open data also in [football.txt](#-plain-text-footballtxt) format.
+> ⚠️ Unofficial fan project — not affiliated with FIFA. Data is "live-style", best-effort.
 
 ---
 
 ## Base URL
 
-```
-https://wcup2026.org/api/data.php?action=<ACTION>
-```
+| Environment | Base URL |
+|---|---|
+| Live demo | `https://wcup2026.org` |
+| Docker (this repo) | `http://localhost:8080` |
+| XAMPP subfolder | `http://localhost/worldcup2026` |
 
-Every response is an envelope:
-
-```json
-{ "ok": true, "action": "today", "updated": 1718600000, "matches": [ ... ] }
-```
-
-`ok` is `false` with an `error` field on bad requests (`unknown_action`, `not_found`).
+All endpoints below are relative to the base URL, e.g.
+`https://wcup2026.org/api/data.php?action=today`.
 
 ---
 
-## Endpoints
+## Endpoint: `GET /api/data.php`
 
-| Action | Params | Returns |
+Select what you want with the `action` query parameter.
+
+| `action` | Extra params | Returns |
 |---|---|---|
-| `today` | — | matches scheduled today (`matches`) |
-| `live` | — | matches in play right now (`matches`) |
-| `upcoming` | — | upcoming fixtures (`matches`) |
-| `results` | — | finished matches with scores (`matches`) |
-| `all` | — | all 104 matches (`matches`) |
-| `match` | `id` | **one match, full detail** (`match`) — score, goals, cards, FIFA stats |
-| `scorers` | — | top scorers / golden‑boot race (`scorers`) |
-| `standings` | — | all 12 group tables (`standings`) |
-| `group` | `g` (e.g. `Group A`) | one group's table (`standings`) |
-| `physical` | — | per‑player running data from FIFA reports (`players`) |
+| `today` | — | Matches scheduled for today |
+| `live` | — | Matches currently in progress |
+| `upcoming` | `limit` (default 10) | Next upcoming matches |
+| `results` | `limit` (default 10) | Most recent finished matches |
+| `all` | — | Every match in the tournament |
+| `match` | `id` (required) | A single match by its id |
+| `group` | `g` (e.g. `Group A`) | Standings table for one group |
+| `standings` | — | Standings tables for all groups |
 
-### Examples
-
-```bash
-curl "https://wcup2026.org/api/data.php?action=results"
-curl "https://wcup2026.org/api/data.php?action=match&id=12"
-curl "https://wcup2026.org/api/data.php?action=scorers"
-curl "https://wcup2026.org/api/data.php?action=group&g=Group%20A"
-```
-
-```js
-// React Native / browser — no backend needed
-const res  = await fetch('https://wcup2026.org/api/data.php?action=scorers');
-const data = await res.json();
-console.log(data.scorers); // [{ name, team, goals }, ...]
-```
-
----
-
-## Response shapes
-
-### Match object (`matches[]` and `match`)
+### Common response envelope
 
 ```json
 {
-  "id": 12,
-  "round": "Matchday 7",
-  "group": "Group C",
-  "team1": "Brazil",          "team2": "Morocco",
-  "team1_ar": "البرازيل",      "team2_ar": "المغرب",
-  "flag1": "https://flagcdn.com/w80/br.png",
-  "flag2": "https://flagcdn.com/w80/ma.png",
-  "status": "finished",        // upcoming | live | finished
-  "score": [1, 1],             // [team1, team2] or null
+  "ok": true,
+  "action": "today",
+  "updated": 1781200800,
+  "matches": [ /* array of Match objects */ ]
+}
+```
+
+On error: `{ "ok": false, "error": "not_found" }` (or `"unknown_action"`).
+
+### Match object
+
+```json
+{
+  "id": 0,
+  "round": "Matchday 1",
+  "group": "Group A",
+  "team1": "Mexico",
+  "team2": "South Africa",
+  "team1_ar": "المكسيك",
+  "team2_ar": "جنوب أفريقيا",
+  "flag1": "https://flagcdn.com/w80/mx.png",
+  "flag2": "https://flagcdn.com/w80/za.png",
+  "status": "scheduled",
+  "score": null,
   "live_minute": null,
-  "date": "2026-06-14", "time": "20:00", "datetime": 1718390000,
-  "ground": "Dallas (Arlington)"
+  "date": "2026-06-11",
+  "time": "11:00 PM",
+  "datetime": 1781200800,
+  "ground": "Mexico City"
 }
 ```
 
-`action=match&id=N` adds richer detail:
+| Field | Type | Notes |
+|---|---|---|
+| `id` | int | Stable index; use it with `action=match&id=` |
+| `team1` / `team2` | string | English team names (openfootball spelling) |
+| `team1_ar` / `team2_ar` | string | Arabic team names |
+| `flag1` / `flag2` | string | URL to the flag image |
+| `status` | string | `scheduled`, `live`, or `finished` |
+| `score` | array/null | `[home, away]` once played, else `null` |
+| `live_minute` | int/null | Current minute when `status` is `live` |
+| `datetime` | int | Unix timestamp (UTC) |
+
+### Standings row (`group` / `standings`)
 
 ```json
-{
-  "ht": [0, 1],                                   // half-time score
-  "goals1": [ { "name": "Vinícius Júnior", "minute": "32", "penalty": true } ],
-  "goals2": [ ... ],                              // scorers per team (+ penalty/og flags)
-  "cards":  [ { "team": 1, "minute": 61, "name": "...", "type": "yellow" } ],
-  "stats":  { "possession": [..], "shots": [..], "xg": [..], "line_breaks": [..], ... }
-}
+{ "team": "Mexico", "p": 3, "w": 2, "d": 1, "l": 0, "gf": 5, "ga": 2, "gd": 3, "pts": 7 }
 ```
 
-### Scorer object (`scorers[]`)
+`p`=played, `w`=won, `d`=draw, `l`=lost, `gf`=goals for, `ga`=goals against,
+`gd`=goal difference, `pts`=points (win 3, draw 1). Sorted by pts → gd → gf → name.
+
+`action=standings` returns an object keyed by group name:
 
 ```json
-{ "name": "Lionel Messi", "team": "Argentina", "goals": 3 }
-```
-
-### Standings row (`standings`, grouped by `Group A` … `Group L`)
-
-```json
-{ "team": "Mexico", "pts": 3, "gd": 2, "played": 1, "w": 1, "d": 0, "l": 0, "gf": 2, "ga": 0 }
-```
-
-### Physical player (`players[]`)
-
-```json
-{ "name": "...", "team": "...", "num": 8, "m": 1,
-  "dist": 11700, "sprints": 44, "hsr": 176, "top": 32.8, "photo": "https://..." }
+{ "ok": true, "standings": { "Group A": [ /* rows */ ], "Group B": [ /* rows */ ] } }
 ```
 
 ---
 
-## 📄 Plain text (football.txt)
+## Static data files (no server needed)
 
-The whole tournament is also exported in the **openfootball `football.txt`** format
-(human‑ and machine‑readable plain text):
+These plain JSON files live in [`/data`](../data) and can be downloaded or imported directly:
 
+| File | Contents |
+|---|---|
+| `data/worldcup_fallback.json` | Full fixture list (rounds, dates, teams, groups, venues) |
+| `data/rankings.json` | FIFA-style ranking per team (`"Team": rank`) |
+| `data/referees.json` | Referees dataset |
+
+---
+
+## Examples
+
+### cURL
+```bash
+curl "https://wcup2026.org/api/data.php?action=today"
+curl "https://wcup2026.org/api/data.php?action=standings"
+curl "https://wcup2026.org/api/data.php?action=match&id=0"
 ```
-https://wcup2026.org/football.php            # schedule + results
-https://wcup2026.org/football.php?results    # results only
-https://wcup2026.org/football.php?reports    # results + scorers + bookings
+
+### Python
+```python
+import requests
+
+BASE = "https://wcup2026.org/api/data.php"
+today = requests.get(BASE, params={"action": "today"}).json()
+for m in today["matches"]:
+    print(f'{m["date"]} {m["time"]}  {m["team1"]} vs {m["team2"]}')
+```
+
+### JavaScript (browser or Node 18+)
+```javascript
+const BASE = "https://wcup2026.org/api/data.php";
+const res  = await fetch(`${BASE}?action=upcoming&limit=5`);
+const data = await res.json();
+data.matches.forEach(m => console.log(`${m.team1} vs ${m.team2}`));
+```
+
+### PHP
+```php
+$data = json_decode(file_get_contents(
+    "https://wcup2026.org/api/data.php?action=standings"), true);
+print_r($data["standings"]["Group A"]);
 ```
 
 ---
 
 ## Notes & fair use
 
-- Read‑only and free. Please cache where you can (data updates roughly every minute).
-- Attribution appreciated: link back to **wcup2026.org**.
-- Schedule data is openfootball (Public Domain); FIFA post‑match metrics are FIFA's official data, presented here.
-- This is a community project — built with ❤️ for football. Questions / ideas: **info@wcup2026.org**.
+- Please cache on your side and avoid hammering the demo server.
+- For heavy use, **self-host** (see the [README](../README.md) — Docker is one command)
+  and point your code at your own instance.
