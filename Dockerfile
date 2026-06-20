@@ -23,6 +23,7 @@ RUN a2enmod rewrite \
 COPY . /var/www/html/
 
 # Runtime folders must be writable (disk cache + file-based data)
-RUN chown -R www-data:www-data /var/www/html/cache /var/www/html/data
+RUN mkdir -p /var/www/html/cache /var/www/html/data && \
+    chown -R www-data:www-data /var/www/html/cache /var/www/html/data
 
 EXPOSE 80
