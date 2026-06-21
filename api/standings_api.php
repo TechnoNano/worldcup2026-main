@@ -1,7 +1,5 @@
 <?php
 
-define('WC2026', true);
-
 require_once __DIR__ . '/../includes/bootstrap.php';
 require_once __DIR__ . '/../includes/helpers.php';
 require_once __DIR__ . '/Standings.php';
