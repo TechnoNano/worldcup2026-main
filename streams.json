@@ -1,12 +1,27 @@
 [
   {
-    "name": "الاساسي",
-    "url": "https://ligspain2.blogspot.com",
+    "name": "Majed Sport",
+    "url": "https://ligspain2.blogspot.com/",
     "type": "website"
   },
   {
     "name": "Server 2",
-    "url": "https://player.twitch.tv/?channel=sdspspsps&muted=false&parent=majed-koora.live",
+    "url": "https://example.com/embed",
     "type": "iframe"
+  },
+  {
+    "name": "Arena 4K",
+    "url": "https://example.com/live.m3u8",
+    "type": "m3u8"
+  },
+  {
+    "name": "YouTube Live",
+    "url": "https://www.youtube.com/embed/VIDEO_ID",
+    "type": "youtube"
+  },
+  {
+    "name": "Twitch",
+    "url": "https://player.twitch.tv/?channel=CHANNEL_NAME&parent=worldcup2026-main.onrender.com",
+    "type": "twitch"
   }
 ]
