@@ -10,7 +10,7 @@ echo json_encode([
     "title" => "FIFA World Cup 2026™",
     "subtitle" => "United States • Canada • Mexico",
     "description" => "The biggest football event in the world",
-    "button_text" => "View Tournament",
+    "button_text" => "كل جديد تجدو هنا ",
     "button_action" => "#groups",
     "image" => "https://worldcup2026-main.onrender.com/images/ronaldo.png",
     "background" => "https://worldcup2026-main.onrender.com/images/banner-bg.jpg"
