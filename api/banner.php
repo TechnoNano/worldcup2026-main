@@ -9,9 +9,14 @@ echo json_encode([
     "enabled" => true,
     "title" => "FIFA World Cup 2026™",
     "subtitle" => "United States • Canada • Mexico",
-    "description" => "The biggest football event in the world",
-    "button_text" => "كل جديد تجدو هنا ",
+    "description" => "قد يحدث تأخير بسيط في تحديث البيانات بسبب الضغط على الخادم",
+    "button_text" => "كل جديد هنا ومونديال أكثر متعة",
     "button_action" => "#groups",
-    "image" => "https://worldcup2026-main.onrender.com/images/ronaldo.png",
+
+    // صورة اللاعب
+    "image" => "https://f.top4top.io/p_38266h6xx1.png",
+
+    // خلفية البطاقة
     "background" => "https://worldcup2026-main.onrender.com/images/banner-bg.jpg"
+
 ], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
