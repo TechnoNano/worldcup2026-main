@@ -1,38 +1,37 @@
 <?php
 
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=utf-8");
+require __DIR__ . '/../includes/bootstrap.php';
 
-require_once __DIR__ . "/data.php";
-
-$data = get_all_matches(); // إذا كانت موجودة عندك
-$matches = $data["matches"] ?? [];
+header('Content-Type: application/json; charset=utf-8');
+header('Access-Control-Allow-Origin: *');
 
 $teams = [];
 
-foreach ($matches as $match) {
+foreach (DataService::allMatches() as $match) {
 
-    if (!empty($match["team1"])) {
-        $teams[$match["team1"]] = [
-            "name" => $match["team1"],
-            "name_ar" => $match["team1_ar"] ?? "",
-            "flag" => $match["flag1"] ?? ""
+    $t1 = trim($match['team1'] ?? '');
+    $t2 = trim($match['team2'] ?? '');
+
+    if ($t1 !== '' && !isset($teams[$t1])) {
+        $teams[$t1] = [
+            "name"    => $t1,
+            "name_ar" => team_name($t1),
+            "flag"    => flag_url($t1, "w80")
         ];
     }
 
-    if (!empty($match["team2"])) {
-        $teams[$match["team2"]] = [
-            "name" => $match["team2"],
-            "name_ar" => $match["team2_ar"] ?? "",
-            "flag" => $match["flag2"] ?? ""
+    if ($t2 !== '' && !isset($teams[$t2])) {
+        $teams[$t2] = [
+            "name"    => $t2,
+            "name_ar" => team_name($t2),
+            "flag"    => flag_url($t2, "w80")
         ];
     }
 }
 
-$teams = array_values($teams);
+ksort($teams);
 
-usort($teams, function($a, $b){
-    return strcmp($a["name"], $b["name"]);
-});
-
-echo json_encode($teams, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+echo json_encode(
+    array_values($teams),
+    JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT
+);
