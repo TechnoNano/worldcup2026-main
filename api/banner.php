@@ -8,8 +8,8 @@ header("Content-Type: application/json; charset=utf-8");
 echo json_encode([
     "enabled" => true,
     "title" => "FIFA World Cup 2026™",
-    "subtitle" => "United States • Canada • Mexico",
-    "description" => "قد يحدث تأخير بسيط في تحديث البيانات بسبب الضغط على الخادم",
+    "subtitle" => "قد يحدث تأخير بسيط في تحديث البيانات بسبب الضغط على الخادم",
+    "description" => "United States • Canada • Mexico",
     "button_text" => "كل جديد هنا ومونديال أكثر متعة",
     "button_action" => "#groups",
 
