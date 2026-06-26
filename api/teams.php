@@ -7,26 +7,24 @@ header('Access-Control-Allow-Origin: *');
 
 $teams = [];
 
-foreach (DataService::allMatches() as $match) {
+foreach (Standings::all() as $group => $rows) {
 
-    $t1 = trim($match['team1'] ?? '');
-    $t2 = trim($match['team2'] ?? '');
+    foreach ($rows as $team) {
 
-    if ($t1 !== '' && !isset($teams[$t1])) {
-        $teams[$t1] = [
-            "name"    => $t1,
-            "name_ar" => team_name($t1),
-            "flag"    => flag_url($t1, "w80")
-        ];
+        $name = trim($team['team']);
+
+        if (!isset($teams[$name])) {
+
+            $teams[$name] = [
+                "name"    => $name,
+                "name_ar" => team_name($name),
+                "flag"    => flag_url($name, "w80")
+            ];
+
+        }
+
     }
 
-    if ($t2 !== '' && !isset($teams[$t2])) {
-        $teams[$t2] = [
-            "name"    => $t2,
-            "name_ar" => team_name($t2),
-            "flag"    => flag_url($t2, "w80")
-        ];
-    }
 }
 
 ksort($teams);
