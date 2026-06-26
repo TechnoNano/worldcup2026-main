@@ -3,13 +3,8 @@
   "title": "FIFA World Cup 2026™",
   "subtitle": "United States • Canada • Mexico",
   "description": "The biggest football event in the world",
-  "button_text": "ستمتع بمشاهده ممتعه",
-  "button_action": "https://worldcup2026.org",
+  "button_text": "View Tournament",
+  "button_action": "#groups",
   "image": "https://worldcup2026-main.onrender.com/images/ronaldo.png",
-  "background": "https://worldcup2026-main.onrender.com/images/banner-bg.jpg",
-  "text_color": "#FFFFFF",
-  "button_color": "#FF2D7A",
-  "show_button": true,
-  "start_date": "2026-06-01",
-  "end_date": "2026-07-31"
+  "background": "https://worldcup2026-main.onrender.com/images/banner-bg.jpg"
 }
