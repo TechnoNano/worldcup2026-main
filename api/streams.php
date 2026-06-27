@@ -7,19 +7,19 @@ header("Content-Type: application/json; charset=utf-8");
 
 echo json_encode([
     [
-        "name" => "مباراه العراق HD",
+        "name" => "Server 1",
         "url" => "https://ligspain2.blogspot.com/"
     ],
     [
-        "name" => "مباراه العراق 2",
+        "name" => "Server 2",
         "url" => "https://player.twitch.tv/?channel=falahhkr1&muted=false&parent=majed-koora.live"
     ],
     [
-        "name" => "مباراه فرنساHD",
+        "name" => "Server 3",
         "url" => "https://example.com/server3"
     ],
     [
-        "name" => "مباراه فرنسا 2",
+        "name" => "Server 4",
         "url" => "https://example.com/server4"
     ]
 ], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
