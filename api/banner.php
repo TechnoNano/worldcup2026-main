@@ -14,7 +14,7 @@ echo json_encode([
     "button_action" => "#groups",
 
     // صورة اللاعب
-    "image" => "https://f.top4top.io/p_38266h6xx1.png",
+    "image" => "https://i.postimg.cc/zvBDnjhc/tsmym-bdwn-ʿnwan.png,
 
     // خلفية البطاقة
     "background" => "https://worldcup2026-main.onrender.com/images/banner-bg.jpg"
