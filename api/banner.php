@@ -13,10 +13,10 @@ echo json_encode([
     "button_text" => "كل جديد هنا ومونديال أكثر متعة",
     "button_action" => "#groups",
 
-    // صورة اللاعب
-    "image" => "https://i.postimg.cc/zvBDnjhc/tsmym-bdwn-ʿnwan.png,
+    // Player image
+    "image" => "https://i.postimg.cc/zvBDnjhc/tsmym-bdwn-ʿnwan.png",
 
-    // خلفية البطاقة
+    // Background image
     "background" => "https://worldcup2026-main.onrender.com/images/banner-bg.jpg"
 
 ], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
