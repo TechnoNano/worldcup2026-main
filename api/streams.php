@@ -8,15 +8,15 @@ header("Content-Type: application/json; charset=utf-8");
 echo json_encode([
     [
         "name" => "Server 1",
-        "url" => "https://majed-koora.co/stream.php?channel=chche999&file=stream.m3u8"
+        "url" => "https://player.twitch.tv/?channel=majed92921&muted=false&parent=majed-koora.co"
     ],
     [
         "name" => "Server 2",
-        "url" => "https://player.twitch.tv/?autoplay=true&channel=akefbad1&muted=false&parent=appscss.blogspot.com&parent=www.appscss.blogspot.com"
+        "url" => "https://majed-koora.co/stream.php?channel=majed92921&file=stream.m3u8"
     ],
     [
         "name" => "Server 3",
-        "url" => "https://player.twitch.tv/?channel=%20chche999&muted=false&parent=majed-koora.co"
+        "url" => "https://majed-koora.co/stream.php?channel=majed92921&file=stream.m3u8"
     ],
     [
         "name" => "Server 4",
