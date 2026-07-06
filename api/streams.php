@@ -16,7 +16,7 @@ echo json_encode([
     ],
     [
         "name" => "Server 3",
-        "url" => "https://majed-koora.co/stream.php?channel=majed92921&file=stream.m3u8"
+        "url" => "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
     ],
     [
         "name" => "Server 4",
