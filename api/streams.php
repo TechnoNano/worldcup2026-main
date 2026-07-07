@@ -13,7 +13,7 @@ $servers = [
         "type" => "twitch",
         "quality" => "Auto",
         "default" => true,
-        "url" => "https://player.twitch.tv/?channel=majed92921&muted=false&parent=majed-koora.co"
+        "url" => "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
     ],
 
     [
@@ -40,7 +40,7 @@ $servers = [
         "type" => "mp4",
         "quality" => "HD",
         "default" => false,
-        "url" => "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+        "url" => "https://download.samplelib.com/mp4/sample-20s.mp4"
     ]
 
 ];
