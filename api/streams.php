@@ -13,7 +13,7 @@ $servers = [
         "type" => "twitch",
         "quality" => "Auto",
         "default" => true,
-        "url" => "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
+        "url" => "https://player.twitch.tv/?channel=oilrats&enableExtensions=true&muted=false&parent=twitch.tv&player=popout&quality=auto&volume=0.5"
     ],
 
     [
