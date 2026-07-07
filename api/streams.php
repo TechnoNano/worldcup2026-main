@@ -8,11 +8,11 @@ header("Content-Type: application/json; charset=utf-8");
 echo json_encode([
     [
         "name" => "Server ",
-        "url" => "https://player.twitch.tv/?channel=majed92921&muted=false&parent=majed-koora.co"
+        "url" => "https://player.twitch.tv/?channel=koora111212&muted=false&parent=www.majed-koora.com"
     ],
     [
         "name" => "Server ",
-        "url" => "https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_ts/master.m3u8"
+        "url" => "https://player.twitch.tv/?channel=1jul01&enableExtensions=true&muted=false&parent=twitch.tv&player=popout&quality=auto&volume=0.5"
 
     ]
 ], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
