@@ -13,16 +13,17 @@ $servers = [
         "type" => "twitch",
         "quality" => "Auto",
         "default" => true,
-        "url" => "https://player.twitch.tv/?channel=oilrats&enableExtensions=true&muted=false&parent=twitch.tv&player=popout&quality=auto&volume=0.5"
+        "url" => "https://player.twitch.tv/?channel=mamajjeedd99&muted=false&parent=majed-koora.com"
     ],
 
     [
         "id" => 2,
-        "name" => "Server 2",
-        "type" => "hls",
-        "quality" => "1080p",
-        "default" => false,
-        "url" => "https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_ts/master.m3u8"
+        "name" => "Server2",
+        "type" => "twitch",
+        "quality" => "Auto",
+        "default" => true,
+        "url" => "https://player.twitch.tv/?channel=mamajjeedd99&muted=false&parent=majed-koora.com"
+    
     ],
 
     [
