@@ -5,21 +5,44 @@ header("Access-Control-Allow-Headers: *");
 header("Access-Control-Allow-Methods: GET, OPTIONS");
 header("Content-Type: application/json; charset=utf-8");
 
-echo json_encode([
+$servers = [
+
     [
-        "name" => "Server ",
+        "id" => 1,
+        "name" => "Server 1",
+        "type" => "twitch",
+        "quality" => "Auto",
+        "default" => true,
         "url" => "https://player.twitch.tv/?channel=majed92921&muted=false&parent=majed-koora.co"
     ],
+
     [
-        "name" => "Server ",
+        "id" => 2,
+        "name" => "Server 2",
+        "type" => "hls",
+        "quality" => "1080p",
+        "default" => false,
         "url" => "https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_ts/master.m3u8"
     ],
+
     [
-        "name" => "Server ",
+        "id" => 3,
+        "name" => "Server 3",
+        "type" => "hls",
+        "quality" => "720p",
+        "default" => false,
         "url" => "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
     ],
+
     [
-        "name" => "Server",
+        "id" => 4,
+        "name" => "Server 4",
+        "type" => "mp4",
+        "quality" => "HD",
+        "default" => false,
         "url" => "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
     ]
-], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+
+];
+
+echo json_encode($servers, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
