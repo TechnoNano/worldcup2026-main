@@ -8,7 +8,7 @@ header("Content-Type: application/json; charset=utf-8");
 echo json_encode([
     [
         "name" => "Server ",
-        "url" => "https://player.twitch.tv/?channel=koora111212&muted=false&parent=www.majed-koora.com"
+        "url" => "https://player.twitch.tv/?channel=koora1111212&muted=false&parent=www.majed-koora.com"
     ],
     [
         "name" => "Server ",
